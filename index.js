@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-
 const bodyParser = require("body-parser");
 const { User } = require("./models/User");
+const config = require("./config/key");
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,15 +13,12 @@ app.use(bodyParser.json());
 // 몽구스 연결 : 에러 => 다운그레이드
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://root:1q2w3e4r@basic.in96t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(config.mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
