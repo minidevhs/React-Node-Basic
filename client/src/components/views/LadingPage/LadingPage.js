@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { PromiseProvider } from "mongoose";
+import { withRouter } from "react-router-dom";
 
 function LandingPage(props) {
   useEffect(() => {
@@ -36,4 +37,4 @@ function LandingPage(props) {
   );
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);
